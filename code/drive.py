@@ -80,8 +80,8 @@ def telemetry(sid, data):
         image_array = image_array[65:-25, :, :]
 
         # transform RGB to BGR for cv2
-        image_array = image_array[:, :, ::-1]
-        image_array = transformations(image_array)
+        # image_array = image_array[:, :, ::-1]
+        # image_array = transformations(image_array)
         image_tensor = torch.Tensor(image_array)
         image_tensor = image_tensor.view(1, 3, 70, 320)
         image_tensor = Variable(image_tensor)
@@ -116,7 +116,6 @@ def telemetry(sid, data):
 
 @sio.on('connect')
 def connect(sid, environ):
-    print('xxxxxxxxxxxxxxxxx')
     print("connect ", sid)
     send_control(0, 0)
 

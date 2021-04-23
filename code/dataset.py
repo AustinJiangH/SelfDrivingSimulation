@@ -77,8 +77,8 @@ class DrivingDataset(Dataset):
 
         # read steering angles
         center_steering_angle = steering_angle
-        left_steering_angle = steering_angle
-        right_steering_angle = steering_angle
+        left_steering_angle = steering_angle + 0.5
+        right_steering_angle = steering_angle - 0.5
 
         # transform images if needed
         if self.transform is not None:
