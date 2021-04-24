@@ -7,7 +7,7 @@ from torchvision.io import read_image
 from scipy.ndimage.filters import uniform_filter1d
 
 
-def read_driving_records(data_directory, test_fraction=0.1, valid_fraction=0.1):
+def read_driving_records(data_directory, test_fraction=0.05, valid_fraction=0.05):
     """Read data from file and split data into train, valid, test subsets
     
     Parameters
@@ -29,7 +29,7 @@ def read_driving_records(data_directory, test_fraction=0.1, valid_fraction=0.1):
     data_col = ['center', 'left', 'right', 'steering', 'throttle', 'reverse', 'speed']
     data = pd.read_csv(data_directory, names= data_col)
     # smoothing the steering angle to avoid jettering in the output
-    data['steering'] = uniform_filter1d(data['steering'], size=5)
+    data['steering'] = uniform_filter1d(data['steering'], size=15)
 
     # train test valid split 
     data_len = data.shape[0]
@@ -102,12 +102,14 @@ def get_driving_data_loaders(batch_size, train_dataset, valid_dataset, test_data
 
     valid_loader = DataLoader(dataset=valid_dataset,
                                 batch_size=batch_size,
-                                num_workers=num_workers)
+                                num_workers=num_workers,
+                                shuffle=True)
 
     train_loader = DataLoader(dataset=train_dataset,
                                 batch_size=batch_size,
                                 num_workers=num_workers,
-                                drop_last=True)
+                                drop_last=True, 
+                                shuffle=True)
 
     test_loader = DataLoader(dataset=test_dataset,
                              batch_size=batch_size,
