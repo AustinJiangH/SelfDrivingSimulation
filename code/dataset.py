@@ -41,7 +41,7 @@ def read_driving_records(data_directory, test_fraction=0.1, valid_fraction=0.1):
     return train_records, valid_records, test_records
 
 
-def read_driving_image(data_directory, image_name):
+def read_driving_image(data_directory, image_name, steering):
     """Read an image to torch tensor
     
     Parameters
@@ -56,10 +56,15 @@ def read_driving_image(data_directory, image_name):
     current_image : torch.tensor
     """
     image_path = os.path.join(data_directory, 'IMG', image_name.split('\\')[-1]).replace('\\','/')
-    current_image = read_image(image_path)
+    current_image = read_image(image_path) # [3, 160, 320]
     # cut the top and buttom of the image
-    current_image = current_image[:,65:-25,:]
-    return current_image.float()
+    current_image = current_image[:,65:-25,:] # [3, 70, 320]
+    if np.random.rand() < 0.5:
+        current_image = torch.flip(current_image, [2])# flip along vertical axis
+        # current_image = np.flipud(current_image)
+        steering = steering * -1.0
+
+    return current_image.float(), steering
 
 
 class DrivingDataset(Dataset):
@@ -75,14 +80,10 @@ class DrivingDataset(Dataset):
 
 
         # read images 
-        center_image = read_driving_image(self.data_directory, batch_records[0])
-        left_image = read_driving_image(self.data_directory, batch_records[1])
-        right_image = read_driving_image(self.data_directory, batch_records[2])
+        center_image, center_steering_angle = read_driving_image(self.data_directory, batch_records[0], steering_angle)
+        left_image, left_steering_angle = read_driving_image(self.data_directory, batch_records[1], steering_angle + 0.5)
+        right_image, right_steering_angle = read_driving_image(self.data_directory, batch_records[2], steering_angle - 0.5)
 
-        # read steering angles
-        center_steering_angle = steering_angle
-        left_steering_angle = steering_angle + 0.5
-        right_steering_angle = steering_angle - 0.5
 
         # transform images if needed
         if self.transform is not None:
