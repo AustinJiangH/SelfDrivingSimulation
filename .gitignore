@@ -2,7 +2,7 @@
 data/
 doc/
 simulator-windows/
-
+code/model-*.h5
 
 
 

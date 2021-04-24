@@ -26,8 +26,8 @@ app = Flask(__name__)
 model = None
 prev_image_array = None
 
-transformations = transforms.Compose(
-    [transforms.Lambda(lambda x: (x / 127.5) - 1.0)])
+# transformations = transforms.Compose(
+#     [transforms.Lambda(lambda x: (x / 127.5) - 1.0)])
 
 
 class SimplePIController:
@@ -64,7 +64,6 @@ controller.set_desired(set_speed)
 @sio.on('telemetry')
 def telemetry(sid, data):
     if data:
-        print(data['speed'])
         # The current steering angle of the car
         steering_angle = float(data["steering_angle"])
 
@@ -74,15 +73,25 @@ def telemetry(sid, data):
         # The current speed of the car
         speed = float(data["speed"])
 
+        # --------------Previous reading solution --------------- 
+        # image = Image.open(BytesIO(base64.b64decode(data["image"])))
+        # image_array = np.array(image.copy())
+        # image_array = image_array[65:-25, :, :]
+
+        # # transform RGB to BGR for cv2
+        # # image_array = image_array[:, :, ::-1]
+        # # image_array = transformations(image_array)
+        # image_tensor = torch.Tensor(image_array)
+        # image_tensor = image_tensor.view(1, 3, 70, 320)
+        # image_tensor = Variable(image_tensor)
+        # -------------------------------------------------------
+
         image = Image.open(BytesIO(base64.b64decode(data["image"])))
-
         image_array = np.array(image.copy())
-        image_array = image_array[65:-25, :, :]
-
-        # transform RGB to BGR for cv2
-        # image_array = image_array[:, :, ::-1]
-        # image_array = transformations(image_array)
         image_tensor = torch.Tensor(image_array)
+        # remove top and bottom
+        image_tensor = image_tensor[65:-25,:,:]
+        # reshape for model
         image_tensor = image_tensor.view(1, 3, 70, 320)
         image_tensor = Variable(image_tensor)
 
@@ -101,8 +110,7 @@ def telemetry(sid, data):
         # ----------------------- Improved by Siraj ----------------------- #
 
         send_control(steering_angle, throttle)
-        print("Steering angle: {} | Throttle: {}".format(
-            steering_angle, throttle))
+        print("Steering angle: {} | Throttle: {}".format(steering_angle, throttle))
 
         # save frame
         if args.image_folder != '':

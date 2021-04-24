@@ -1,9 +1,11 @@
+import os
 import numpy as np
 import pandas as pd
-import os
+import torch
 from torch.utils.data import Dataset, DataLoader
 from torchvision.io import read_image
-import torch
+from scipy.ndimage.filters import uniform_filter1d
+
 
 def read_driving_records(data_directory, test_fraction=0.1, valid_fraction=0.1):
     """Read data from file and split data into train, valid, test subsets
@@ -26,7 +28,8 @@ def read_driving_records(data_directory, test_fraction=0.1, valid_fraction=0.1):
     data_directory = os.path.join(data_directory, 'driving_log.csv').replace('\\','/')
     data_col = ['center', 'left', 'right', 'steering', 'throttle', 'reverse', 'speed']
     data = pd.read_csv(data_directory, names= data_col)
-
+    # smoothing the steering angle to avoid jettering in the output
+    data['steering'] = uniform_filter1d(data['steering'], size=5)
 
     # train test valid split 
     data_len = data.shape[0]
@@ -54,6 +57,7 @@ def read_driving_image(data_directory, image_name):
     """
     image_path = os.path.join(data_directory, 'IMG', image_name.split('\\')[-1]).replace('\\','/')
     current_image = read_image(image_path)
+    # cut the top and buttom of the image
     current_image = current_image[:,65:-25,:]
     return current_image.float()
 
