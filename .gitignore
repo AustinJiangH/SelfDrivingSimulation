@@ -3,6 +3,7 @@ data/
 doc/
 simulator-windows/
 code/model-*.h5
+beta_simulator*
 
 
 

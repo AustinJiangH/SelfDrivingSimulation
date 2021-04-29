@@ -9,7 +9,9 @@ def train_model(model, num_epochs, train_loader,
                 device, logging_interval=50,
                 scheduler=None,
                 scheduler_on='minibatch_loss', resume=False, resume_epoch=0):
-
+    
+    # check if the model is on resume mode
+    # if on, load pre-trained model from file
     if resume:
         print("Resuming status...")
         checkpoint = torch.load(f"/model-{str(resume_epoch)}.h5",
@@ -19,17 +21,18 @@ def train_model(model, num_epochs, train_loader,
         optimizer.load_state_dict(checkpoint['optimizer'])
         scheduler.load_state_dict(checkpoint['scheduler'])
 
-
+    # initiate some utility variables 
     start_time = time.time()
     train_loss_list, valid_loss_list = [], []
     
+    # transfer model to device 
     model.to(device)
     for epoch in range(num_epochs):
-        
-
+        # start training mode
         model.train()
         for batch_index, (centers, lefts, rights) in enumerate(train_loader):
 
+            # reset current minibatch loss
             minibatch_loss = 0
             # transfer data to device 
             centers[0] = centers[0].to(device)
@@ -41,6 +44,7 @@ def train_model(model, num_epochs, train_loader,
 
             # forward and backward propagation
             optimizer.zero_grad()
+            # for each image from three cameras, we calculate the loss and add it to current minibatch loss
             datas = [centers, lefts, rights]
             for data in datas:
                 imgs, angles = data
@@ -53,13 +57,12 @@ def train_model(model, num_epochs, train_loader,
             train_loss_list.append(minibatch_loss)
             scheduler.step()
 
-
             if not batch_index % logging_interval:
                 print(f'Epoch: {epoch+1:03d}/{num_epochs:03d} '
                       f'| Batch {batch_index:04d}/{len(train_loader):04d} '
                       f'| Loss: {minibatch_loss:.4f}')
 
-        # validation 
+        # validation mode
         model.eval()
         with torch.no_grad():  # save memory during inference
             for batch_index, (centers, lefts, rights) in enumerate(valid_loader):
@@ -73,7 +76,7 @@ def train_model(model, num_epochs, train_loader,
                 rights[0] = rights[0].to(device)
                 rights[1] = rights[1].to(device)
 
-                ## FORWARD AND BACK PROP
+                # forward and backward propagation
                 optimizer.zero_grad()
                 datas = [centers, lefts, rights]
                 for data in datas:

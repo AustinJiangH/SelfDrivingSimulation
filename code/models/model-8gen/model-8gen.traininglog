@@ -1,0 +1,108 @@
+Length of train: 7439, valid: 413, test: 414
+Epoch: 001/050 | Batch 0000/0232 | Loss: 1.2869
+Epoch: 001/050 | Batch 0050/0232 | Loss: 0.2568
+Epoch: 001/050 | Batch 0100/0232 | Loss: 0.2409
+Epoch: 001/050 | Batch 0150/0232 | Loss: 0.2996
+Epoch: 001/050 | Batch 0200/0232 | Loss: 0.2338
+Epoch: 001/050 | Train Loss: 0.28515 | Validation Loss: 0.25079
+Time elapsed: 9.94 min
+C:\Program Files\Python39\lib\site-packages\torch\optim\lr_scheduler.py:154: UserWarning: The epoch parameter in `scheduler.step()` was not necessary and is being deprecated where possible. Please use `scheduler.step()` to step the scheduler. During the deprecation, if epoch is different from None, the closed form is used instead of the new chainable form, where available. Please open an issue if you are unable to replicate your use case: https://github.com/pytorch/pytorch/issues/new/choose.
+  warnings.warn(EPOCH_DEPRECATION_WARNING, UserWarning)
+Epoch: 002/050 | Batch 0000/0232 | Loss: 0.2514
+Epoch: 002/050 | Batch 0050/0232 | Loss: 0.2506
+Epoch: 002/050 | Batch 0100/0232 | Loss: 0.2164
+Epoch: 002/050 | Batch 0150/0232 | Loss: 0.2079
+Epoch: 002/050 | Batch 0200/0232 | Loss: 0.1693
+Epoch: 002/050 | Train Loss: 0.19174 | Validation Loss: 0.15253
+Time elapsed: 16.86 min
+Epoch: 003/050 | Batch 0000/0232 | Loss: 0.1643
+Epoch: 003/050 | Batch 0050/0232 | Loss: 0.1444
+Epoch: 003/050 | Batch 0100/0232 | Loss: 0.1414
+Epoch: 003/050 | Batch 0150/0232 | Loss: 0.1821
+Epoch: 003/050 | Batch 0200/0232 | Loss: 0.1572
+Epoch: 003/050 | Train Loss: 0.12561 | Validation Loss: 0.12454
+Time elapsed: 25.42 min
+Epoch: 004/050 | Batch 0000/0232 | Loss: 0.1254
+Epoch: 004/050 | Batch 0050/0232 | Loss: 0.1490
+Epoch: 004/050 | Batch 0100/0232 | Loss: 0.1134
+Epoch: 004/050 | Batch 0150/0232 | Loss: 0.1167
+Epoch: 004/050 | Batch 0200/0232 | Loss: 0.1099
+Epoch: 004/050 | Train Loss: 0.13003 | Validation Loss: 0.18275
+Time elapsed: 33.78 min
+Epoch: 005/050 | Batch 0000/0232 | Loss: 0.1252
+Epoch: 005/050 | Batch 0050/0232 | Loss: 0.1178
+Epoch: 005/050 | Batch 0100/0232 | Loss: 0.0919
+Epoch: 005/050 | Batch 0150/0232 | Loss: 0.1169
+Epoch: 005/050 | Batch 0200/0232 | Loss: 0.0763
+Epoch: 005/050 | Train Loss: 0.12556 | Validation Loss: 0.08917
+Time elapsed: 41.15 min
+Epoch: 006/050 | Batch 0000/0232 | Loss: 0.1216
+Epoch: 006/050 | Batch 0050/0232 | Loss: 0.0872
+Epoch: 006/050 | Batch 0100/0232 | Loss: 0.1224
+Epoch: 006/050 | Batch 0150/0232 | Loss: 0.0969
+Epoch: 006/050 | Batch 0200/0232 | Loss: 0.1079
+Epoch: 006/050 | Train Loss: 0.10029 | Validation Loss: 0.12637
+Time elapsed: 48.38 min
+Epoch: 007/050 | Batch 0000/0232 | Loss: 0.0822
+Epoch: 007/050 | Batch 0050/0232 | Loss: 0.0782
+Epoch: 007/050 | Batch 0100/0232 | Loss: 0.0683
+Epoch: 007/050 | Batch 0150/0232 | Loss: 0.0648
+Epoch: 007/050 | Batch 0200/0232 | Loss: 0.0855
+Epoch: 007/050 | Train Loss: 0.06698 | Validation Loss: 0.08496
+Time elapsed: 54.92 min
+Epoch: 008/050 | Batch 0000/0232 | Loss: 0.0771
+Epoch: 008/050 | Batch 0050/0232 | Loss: 0.0682
+Epoch: 008/050 | Batch 0100/0232 | Loss: 0.0926
+Epoch: 008/050 | Batch 0150/0232 | Loss: 0.0587
+Epoch: 008/050 | Batch 0200/0232 | Loss: 0.0699
+Epoch: 008/050 | Train Loss: 0.06507 | Validation Loss: 0.08616
+Time elapsed: 61.28 min
+Epoch: 009/050 | Batch 0000/0232 | Loss: 0.0686
+Epoch: 009/050 | Batch 0050/0232 | Loss: 0.0743
+Epoch: 009/050 | Batch 0100/0232 | Loss: 0.0510
+Epoch: 009/050 | Batch 0150/0232 | Loss: 0.0605
+Epoch: 009/050 | Batch 0200/0232 | Loss: 0.0854
+Epoch: 009/050 | Train Loss: 0.06149 | Validation Loss: 0.04914
+Time elapsed: 67.54 min
+Epoch: 010/050 | Batch 0000/0232 | Loss: 0.0337
+Epoch: 010/050 | Batch 0050/0232 | Loss: 0.0413
+Epoch: 010/050 | Batch 0100/0232 | Loss: 0.0538
+Epoch: 010/050 | Batch 0150/0232 | Loss: 0.0480
+Epoch: 010/050 | Batch 0200/0232 | Loss: 0.0504
+Epoch: 010/050 | Train Loss: 0.04460 | Validation Loss: 0.06746
+Time elapsed: 74.31 min
+Epoch: 011/050 | Batch 0000/0232 | Loss: 0.0346
+Epoch: 011/050 | Batch 0050/0232 | Loss: 0.0511
+Epoch: 011/050 | Batch 0100/0232 | Loss: 0.0372
+Epoch: 011/050 | Batch 0150/0232 | Loss: 0.0606
+Epoch: 011/050 | Batch 0200/0232 | Loss: 0.0308
+Epoch: 011/050 | Train Loss: 0.03182 | Validation Loss: 0.05525
+Time elapsed: 81.38 min
+Epoch: 012/050 | Batch 0000/0232 | Loss: 0.0413
+Epoch: 012/050 | Batch 0050/0232 | Loss: 0.0363
+Epoch: 012/050 | Batch 0100/0232 | Loss: 0.0257
+Epoch: 012/050 | Batch 0150/0232 | Loss: 0.0359
+Epoch: 012/050 | Batch 0200/0232 | Loss: 0.0275
+Epoch: 012/050 | Train Loss: 0.04239 | Validation Loss: 0.05455
+Time elapsed: 88.51 min
+Epoch: 013/050 | Batch 0000/0232 | Loss: 0.0426
+Epoch: 013/050 | Batch 0050/0232 | Loss: 0.0301
+Epoch: 013/050 | Batch 0100/0232 | Loss: 0.0293
+Epoch: 013/050 | Batch 0150/0232 | Loss: 0.0341
+Epoch: 013/050 | Batch 0200/0232 | Loss: 0.0371
+Epoch: 013/050 | Train Loss: 0.04699 | Validation Loss: 0.04411
+Time elapsed: 95.81 min
+Epoch: 014/050 | Batch 0000/0232 | Loss: 0.0266
+Epoch: 014/050 | Batch 0050/0232 | Loss: 0.0217
+Epoch: 014/050 | Batch 0100/0232 | Loss: 0.0257
+Epoch: 014/050 | Batch 0150/0232 | Loss: 0.0338
+Epoch: 014/050 | Batch 0200/0232 | Loss: 0.0303
+Epoch: 014/050 | Train Loss: 0.03295 | Validation Loss: 0.04535
+Time elapsed: 103.38 min
+Epoch: 015/050 | Batch 0000/0232 | Loss: 0.0278
+Epoch: 015/050 | Batch 0050/0232 | Loss: 0.0287
+Epoch: 015/050 | Batch 0100/0232 | Loss: 0.0208
+Epoch: 015/050 | Batch 0150/0232 | Loss: 0.0293
+Epoch: 015/050 | Batch 0200/0232 | Loss: 0.0252
+Epoch: 015/050 | Train Loss: 0.04281 | Validation Loss: 0.04235
+Time elapsed: 111.43 min

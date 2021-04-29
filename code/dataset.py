@@ -8,7 +8,9 @@ from scipy.ndimage.filters import uniform_filter1d
 
 
 def read_driving_records(data_directory, test_fraction=0.05, valid_fraction=0.05):
-    """Read data from file and split data into train, valid, test subsets
+    """
+    Read data from file and split data into train, valid, test subsets.
+    This function also flips 50% of the image and corresponding steering angle to make the result more robust.
     
     Parameters
     ----------
@@ -19,9 +21,9 @@ def read_driving_records(data_directory, test_fraction=0.05, valid_fraction=0.05
 
     Returns
     -------
-    train_records : pd.DataFrame
-    valid_records : pd.DataFrame
-    test_records : pd.DataFrame
+    train_records : pandas DataFrame objcet 
+    valid_records : pandas DataFrame objcet 
+    test_records : pandas DataFrame objcet 
     """
 
     # read data from csv file
@@ -29,7 +31,7 @@ def read_driving_records(data_directory, test_fraction=0.05, valid_fraction=0.05
     data_col = ['center', 'left', 'right', 'steering', 'throttle', 'reverse', 'speed']
     data = pd.read_csv(data_directory, names= data_col)
     # smoothing the steering angle to avoid jettering in the output
-    data['steering'] = uniform_filter1d(data['steering'], size=15)
+    data['steering'] = uniform_filter1d(data['steering'], size=5)
 
     # train test valid split 
     data_len = data.shape[0]
@@ -53,9 +55,9 @@ def read_driving_image(data_directory, image_name, steering):
 
     Returns
     -------
-    current_image : torch.tensor
+    current_image : pytorch tensor
     """
-    image_path = os.path.join(data_directory, 'IMG', image_name.split('\\')[-1]).replace('\\','/')
+    image_path = os.path.join(data_directory, 'IMG', image_name.split('/')[-1]).replace('\\','/')
     current_image = read_image(image_path) # [3, 160, 320]
     # cut the top and buttom of the image
     current_image = current_image[:,65:-25,:] # [3, 70, 320]
@@ -68,7 +70,9 @@ def read_driving_image(data_directory, image_name, steering):
 
 
 class DrivingDataset(Dataset):
-
+    """
+    Custom dataset containing all the records
+    """
     def __init__(self, data_directory, records, transform=None):
         self.records = records
         self.data_directory = data_directory
@@ -79,10 +83,10 @@ class DrivingDataset(Dataset):
         steering_angle = float(batch_records[3])
 
 
-        # read images 
+        # read images / flip images
         center_image, center_steering_angle = read_driving_image(self.data_directory, batch_records[0], steering_angle)
-        left_image, left_steering_angle = read_driving_image(self.data_directory, batch_records[1], steering_angle + 0.5)
-        right_image, right_steering_angle = read_driving_image(self.data_directory, batch_records[2], steering_angle - 0.5)
+        left_image, left_steering_angle = read_driving_image(self.data_directory, batch_records[1], steering_angle + 0.4)
+        right_image, right_steering_angle = read_driving_image(self.data_directory, batch_records[2], steering_angle - 0.4)
 
 
         # transform images if needed
@@ -99,6 +103,21 @@ class DrivingDataset(Dataset):
 
 
 def get_driving_data_loaders(batch_size, train_dataset, valid_dataset, test_dataset,  num_workers=0):
+    """ 
+    Create dataloaders with given dataset 
+
+    Parameters
+    ----------
+    batch_size : int
+    train_dataset : pandas DataFrame objcet 
+    valid_dataset : pandas DataFrame objcet 
+    test_dataset : pandas DataFrame objcet 
+    num_workers : int
+
+    Returns
+    -------
+    dataloaders : tuple of dataloaders (train_loader, valid_loader, test_loader) 
+    """ 
 
     valid_loader = DataLoader(dataset=valid_dataset,
                                 batch_size=batch_size,

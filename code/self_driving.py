@@ -1,3 +1,10 @@
+'''
+
+
+'''
+
+
+
 import torch
 import torch.optim as optim
 from torch.optim.lr_scheduler import MultiStepLR
@@ -23,7 +30,7 @@ DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
 # working directory is code/
-path = '../data/track1data'
+path = '../data/online1'
 train_records, valid_records, test_records = read_driving_records(path)
 train_dataset, valid_dataset, test_dataset = DrivingDataset(path, train_records), DrivingDataset(path, valid_records), DrivingDataset(path, test_records)
 train_loader, valid_loader, test_loader = get_driving_data_loaders(32, train_dataset, valid_dataset, test_dataset)
@@ -37,5 +44,5 @@ model = SelfDrivingModel()
 optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE, weight_decay=WEIGHT_DECAY)
 scheduler = MultiStepLR(optimizer, milestones=[30, 50], gamma=0.1)
 
-
+# train the model 
 train_model(model, NUM_EPOCHS, train_loader, valid_loader, test_loader, optimizer, DEVICE, scheduler=scheduler)
