@@ -1,5 +1,8 @@
 .vscode/
-data/
+data/Demo*
+data/track*
+data/online*
+data/route*
 doc/
 simulator-windows/
 code/model-*.h5
