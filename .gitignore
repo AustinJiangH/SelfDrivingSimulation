@@ -3,7 +3,8 @@ data/Demo*
 data/track*
 data/online*
 data/route*
-doc/
+doc/*.zip
+doc/STAT*
 simulator-windows/
 code/model-*.h5
 beta_simulator*
